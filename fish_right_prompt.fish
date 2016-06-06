@@ -22,7 +22,7 @@ function fish_right_prompt
      printf (trd)":"(dim)"$HOSTNAME "(off)
    end
 
-  if test -d .git
+  if git rev-parse 2> /dev/null
     git::is_stashed; and echo (trd)"^"(off)
     printf (snd)"("(begin
       if git::is_touched
