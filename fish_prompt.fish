@@ -16,5 +16,14 @@ function fish_prompt
     echo -n (set_color $color)">"
   end
 
-  echo -n " "
-end
+set -q VIRTUAL_ENV
+  test $status -ne 0;
+    and set -l colors blue blue --bold
+    or set -l colors red red --bold
+
+  for color in $colors
+    echo -n (set_color $color)">"
+  end
+                       
+  echo -n " " 
+end 
