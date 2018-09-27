@@ -1,8 +1,5 @@
 function fish_prompt
   test $status -ne 0;
-    and set -l colors 600 900 c00
-    or set -l colors 333 666 aaa
-
   set -l pwd (prompt_pwd)
   set -l base (basename "$pwd")
 
@@ -12,18 +9,14 @@ function fish_prompt
 
   echo -n (echo "$pwd" | sed -e $expr)(off)
 
-  for color in $colors
-    echo -n (set_color $color)">"
-  end
-
+test $status -ne 1;
 set -q VIRTUAL_ENV
-  test $status -ne 0;
-    and set -l colors blue blue --bold
-    or set -l colors red red --bold
+  and set -l colors cc6666 cc6666 --bold
+  or set -l colors 81a2be 81a2be --bold
 
   for color in $colors
     echo -n (set_color $color)">"
   end
-                       
-  echo -n " " 
-end 
+
+  echo -n " "
+end
