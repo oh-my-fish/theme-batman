@@ -3,7 +3,8 @@ function git::is_stashed
 end
 
 function git::get_ahead_count
-  echo (command git log 2> /dev/null | grep '^commit' | wc -l | tr -d " ")
+  set -l branch_name (git::branch_name)
+  echo (command git log origin/$branch_name..$branch_name 2> /dev/null | grep '^commit' | wc -l | tr -d " ")
 end
 
 function git::branch_name
