@@ -3,11 +3,21 @@ function git::is_stashed
 end
 
 function git::get_ahead_count
-  echo (command git log 2> /dev/null | grep '^commit' | wc -l | tr -d " ")
+  set -l branch_name (git::branch_name)
+  echo (command git log origin/$branch_name..$branch_name 2> /dev/null | grep '^commit' | wc -l | tr -d " ")
+end
+
+function git::get_behind_count
+  set -l branch_name (git::branch_name)
+  echo (command git log $branch_name..origin/$branch_name 2> /dev/null | grep '^commit' | wc -l | tr -d " ")
 end
 
 function git::branch_name
-  command git symbolic-ref --short HEAD
+  if git symbolic-ref --short HEAD 2> /dev/null
+    echo (command git symbolic-ref --short HEAD 2> /dev/null)
+  else
+    echo (command git rev-parse --short HEAD)
+  end
 end
 
 function git::is_touched
@@ -31,11 +41,18 @@ function fish_right_prompt
         echo ""
       end
     end)(__batman_color_fst)(git::branch_name)(__batman_color_snd)(begin
-      set -l count (git::get_ahead_count)
+        set -l count (git::get_ahead_count)
         if test $count -eq 0
           echo ""
         else
           echo (__batman_color_trd)"+"(__batman_color_fst)$count
+        end
+    end)(begin
+        set -l count (git::get_behind_count)
+        if test $count -eq 0
+          echo ""
+        else
+          echo (__batman_color_trd)"-"(__batman_color_fst)$count
         end
     end)(__batman_color_snd)") "(__batman_color_off)
   end
