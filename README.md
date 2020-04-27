@@ -1,4 +1,4 @@
-<img src="https://dl.dropboxusercontent.com/u/56336/omf/omf-logo-optimised.svg" align="left" width="144px" height="144px"/>
+<img src="https://cloud.githubusercontent.com/assets/8317250/7785620/0059f784-01d3-11e5-8a01-8edf6c4e2af7.png" align="left" width="144px" height="144px"/>
 
 #### Batman
 > A [Oh My Fish][omf-link] theme inspired by Batman.
@@ -20,7 +20,7 @@ _From left to right:_
 + `^` character denotes the current repository has [_stashed_](https://git-scm.com/book/no-nb/v1/Git-Tools-Stashing) changes.
 + `*` character denotes the current repository is dirty.
 + Display current branch.
-+ Display number of commits in relation to the current branch.
++ Display number of commits in relation to the origin of current branch.
 + Display current time.
 + _Batman_ inspired colors.
 
@@ -35,7 +35,6 @@ _From left to right:_
 [MIT][mit] © [Jorge Bucaran][author] et [al][contributors]
 
 > __Disclaimer:__ This work is not intended to infringe on any rights by and of the companies and/or individuals involved in the production of any series mentioned here. I don't own Batman.
-
 
 [mit]:            http://opensource.org/licenses/MIT
 [author]:         http://about.bucaran.me
