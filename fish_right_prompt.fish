@@ -4,7 +4,7 @@ end
 
 function git::print::is_stashed
     if git::is_stashed
-        echo (__batman_color_trd)"^"(__batman_color_off)
+        echo (__color_tertiary)"^"(__color_off)
     else
         echo ""
     end
@@ -19,7 +19,7 @@ function git::branch_name
 end
 
 function git::print::branch_name
-    echo (__batman_color_fst)(git::branch_name)
+    echo (__color_primary)(git::branch_name)
 end
 
 function git::is_touched
@@ -28,7 +28,7 @@ end
 
 function git::print::is_touched
     if git::is_touched
-        echo (__batman_color_trd)"*"(__batman_color_off)
+        echo (__color_tertiary)"*"(__color_off)
     else
         echo ""
     end
@@ -81,35 +81,35 @@ function git::print::remote_info
     set -l behind $remote[2]
 
     if test $ahead != "0"
-        echo (__batman_color_trd)" +"(__batman_color_fst)$ahead
+        echo (__color_tertiary)" +"(__color_primary)$ahead
     end
 
     if test $behind != "0"
-        echo (__batman_color_trd)" -"(__batman_color_fst)$behind
+        echo (__color_tertiary)" -"(__color_primary)$behind
     end
 end
 
 function git::print
     if git rev-parse 2>/dev/null
         echo (git::print::is_stashed)
-        echo (__batman_color_snd)"("
+        echo (__color_secondary)"("
         echo (git::print::is_touched)
         echo (git::print::branch_name)
         echo (git::print::remote_info)
-        echo (__batman_color_snd)") "
-        echo (__batman_color_off)
+        echo (__color_secondary)") "
+        echo (__color_off)
     end
 end
 
 function fish_right_prompt
     set -l code $status
-    test $code -ne 0; and echo (__batman_color_dim)"("(__batman_color_trd)"$code"(__batman_color_dim)") "(__batman_color_off)
+    test $code -ne 0; and echo (__color_dim)"("(__color_tertiary)"$code"(__color_dim)") "(__color_off)
 
     if test -n "$SSH_CONNECTION"
-        printf (__batman_color_trd)":"(__batman_color_dim)"$HOSTNAME "(__batman_color_off)
+        printf (__color_tertiary)":"(__color_dim)"$HOSTNAME "(__color_off)
     end
 
     git::print
 
-    printf (__batman_color_dim)(date +%H(__batman_color_fst):(__batman_color_dim)%M(__batman_color_fst):(__batman_color_dim)%S)(__batman_color_off)" "
+    printf (__color_dim)(date +%H(__color_primary):(__color_dim)%M(__color_primary):(__color_dim)%S)(__color_off)" "
 end
